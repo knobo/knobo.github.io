@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-10-06 to. 11:37 -->
+<!-- 2016-10-06 to. 12:17 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title></title>
+<title>Blog</title>
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Knut Olav" />
+<meta  name="author" content="Knut Olav Bøhmer" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -143,26 +143,72 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
+<h1 class="title">Blog</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. popgetf</a></li>
+<li><a href="#orgheadline2">1. popgetf</a>
+<ul>
+<li><a href="#orgheadline1">1.1. popgetf.lisp</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline3">2. Parsing dates in lisp</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> popgetf</h2>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">1</span> popgetf</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-&lt;script src="<a href="https://gist.github.com/knobo/b26fe906ef1e72a26402840ed34a6848.js">https://gist.github.com/knobo/b26fe906ef1e72a26402840ed34a6848.js</a>"&gt;&lt;/script&gt;
+Wouldn't it be nice if remf could return the key/value it is removing?
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp" id="orgsrcblock1">POPREMF&gt; (<span style="color: #00ffff;">let</span> ((plist (list <span style="color: #b0c4de;">:key1</span> <span style="color: #ffc1c1;">"val2"</span> <span style="color: #b0c4de;">:key2</span> <span style="color: #ffc1c1;">"val2"</span> <span style="color: #b0c4de;">:key3</span> <span style="color: #ffc1c1;">"val3"</span>)))
+           (popremf <span style="color: #b0c4de;">:key2</span> plist))
+(<span style="color: #b0c4de;">:KEY1</span> <span style="color: #ffc1c1;">"val2"</span> <span style="color: #b0c4de;">:KEY3</span> <span style="color: #ffc1c1;">"val3"</span>)
+(<span style="color: #b0c4de;">:KEY2</span> . <span style="color: #ffc1c1;">"val2"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1"><span class="section-number-3">1.1</span> popgetf.lisp</h3>
+<div class="outline-text-3" id="text-1-1">
+<script src="https://gist.github.com/knobo/b26fe906ef1e72a26402840ed34a6848.js"></script>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">2</span> Parsing dates in lisp</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+When parsing dates with Common Lisp library local-time, you need to
+set :offset to nil, or else you might end up with a date in a
+compleatly different timezone then you are in. Not surprisingly GMT,
+though.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-lisp" id="orgsrcblock2">(<span style="color: #00ffff;">let</span> ((local-time:*default-timezone* (local-time:find-timezone-by-location-name <span style="color: #ffc1c1;">"Asia/Kolkata"</span>)))
+  (local-time:parse-timestring <span style="color: #ffc1c1;">"2016-10-06"</span> <span style="color: #b0c4de;">:offset</span> nil))
+@2016-10-05T20:30:00.000000+02:00
+
+(<span style="color: #00ffff;">let</span> ((local-time:*default-timezone* (local-time:find-timezone-by-location-name <span style="color: #ffc1c1;">"Europe/Oslo"</span>)))
+  (local-time:parse-timestring <span style="color: #ffc1c1;">"2016-10-06"</span> <span style="color: #b0c4de;">:offset</span> nil))
+@2016-10-06T00:00:00.000000+02:00
+</pre>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Knut Olav</p>
-<p class="date">Created: 2016-10-06 to. 11:37</p>
+<p class="author">Author: Knut Olav Bøhmer</p>
+<p class="date">Created: 2016-10-06 to. 12:17</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
