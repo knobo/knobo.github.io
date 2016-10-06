@@ -10,35 +10,35 @@
      Wow! This is cool :)
      
      Entered on: [2016-10-06 to. 19:49]
-** popgetf
- Wouldn't it be nice if remf could return the key/value it is removing?
+**** popgetf
+   Wouldn't it be nice if remf could return the key/value it is removing?
 
- #+name: popgetf-test.lisp
- #+begin_src lisp
- POPREMF> (let ((plist (list :key1 "val2" :key2 "val2" :key3 "val3")))
-            (popremf :key2 plist))
- (:KEY1 "val2" :KEY3 "val3")
- (:KEY2 . "val2")
- #+end_src
+   #+name: popgetf-test.lisp
+   #+begin_src lisp
+   POPREMF> (let ((plist (list :key1 "val2" :key2 "val2" :key3 "val3")))
+              (popremf :key2 plist))
+   (:KEY1 "val2" :KEY3 "val3")
+   (:KEY2 . "val2")
+   #+end_src
 
-*** popgetf.lisp
- #+BEGIN_HTML
- <script src="https://gist.github.com/knobo/b26fe906ef1e72a26402840ed34a6848.js"></script>
- #+END_HTML
+***** popgetf.lisp
+   #+BEGIN_HTML
+   <script src="https://gist.github.com/knobo/b26fe906ef1e72a26402840ed34a6848.js"></script>
+   #+END_HTML
 
-** Parsing dates in lisp
-   When parsing dates with Common Lisp library local-time, you need to
-   set :offset to nil, or else you might end up with a date in a
-   compleatly different timezone then you are in. Not surprisingly GMT,
-   though.
- #+name: parse-timestring-test.lisp
- #+header: :var message="Parse timestring!"
- #+begin_src lisp
- (let ((local-time:*default-timezone* (local-time:find-timezone-by-location-name "Asia/Kolkata")))
-   (local-time:parse-timestring "2016-10-06" :offset nil))
- @2016-10-05T20:30:00.000000+02:00
+**** Parsing dates in lisp
+     When parsing dates with Common Lisp library local-time, you need to
+     set :offset to nil, or else you might end up with a date in a
+     compleatly different timezone then you are in. Not surprisingly GMT,
+     though.
+   #+name: parse-timestring-test.lisp
+   #+header: :var message="Parse timestring!"
+   #+begin_src lisp
+   (let ((local-time:*default-timezone* (local-time:find-timezone-by-location-name "Asia/Kolkata")))
+     (local-time:parse-timestring "2016-10-06" :offset nil))
+   @2016-10-05T20:30:00.000000+02:00
 
- (let ((local-time:*default-timezone* (local-time:find-timezone-by-location-name "Europe/Oslo")))
-   (local-time:parse-timestring "2016-10-06" :offset nil))
- @2016-10-06T00:00:00.000000+02:00
- #+end_src
+   (let ((local-time:*default-timezone* (local-time:find-timezone-by-location-name "Europe/Oslo")))
+     (local-time:parse-timestring "2016-10-06" :offset nil))
+   @2016-10-06T00:00:00.000000+02:00
+   #+end_src
