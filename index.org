@@ -1,7 +1,7 @@
 #+TITLE: Blog
 #+AUTHOR: Knut Olav Bøhmer
 #+EMAIL: bohmer at gmail.com
-#+OPTIONS: num:nil, email:t
+#+OPTIONS: num:nil, email:t, H:4
 
 * 2016
 ** 2016-10 oktober
