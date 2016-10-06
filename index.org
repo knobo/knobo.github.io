@@ -1,6 +1,6 @@
 #+TITLE: Blog
 #+AUTHOR: Knut Olav Bøhmer
-#+EMAIL: bohmer@gmail.com
+#+EMAIL: bohmer at gmail.com
 
 * popgetf
 Wouldn't it be nice if remf could return the key/value it is removing?
