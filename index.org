@@ -1,4 +1,4 @@
-#+TITLE: Blog
+#+TITLE: Orgmode Harvest
 #+AUTHOR: Knut Olav Bøhmer
 #+EMAIL: bohmer at gmail.com
 #+OPTIONS: num:nil, email:t, H:4
@@ -6,10 +6,6 @@
 * 2016
 ** 2016-10 oktober
 *** 2016-10-06 torsdag
-**** Testing org-caputre.
-     Wow! This is cool :)
-     
-     Entered on: [2016-10-06 to. 19:49]
 **** popgetf
    Wouldn't it be nice if remf could return the key/value it is removing?
 
@@ -42,3 +38,76 @@
      (local-time:parse-timestring "2016-10-06" :offset nil))
    @2016-10-06T00:00:00.000000+02:00
    #+end_src
+
+**** Testing org-caputre.
+     Wow! This is cool :) I binded <f12> to org-capture and created a blog template
+     
+     Entered on: [2016-10-06 to. 19:49]
+**** org-mode capture blog template
+    Created custom template file for capturing with org-mode
+
+    #+BEGIN_HTML
+      <pre>
+      **** %?
+      %i
+
+      Entered on: %U
+      </pre>
+    #+END_HTML
+
+  Entered on: [2016-10-06 to. 20:15]
+
+
+*** 2016-10-07 fredag
+**** Opening characther devices with linux.
+     This should come as no supprise. But I got a bit interested after
+     seeing a guy on irc that had some problems writing to a
+     characther device
+***** bash:
+      #+begin_src bash
+      $ strace -f -ff  bash -c '/bin/echo -en "x\r" >/dev/null'
+
+      open("/dev/null", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
+      dup2(3, 1)                  = 1
+      close(3)                    = 0
+      ioctl(1, TCGETS, 0x7ffdb8ceb880) = -1 ENOTTY (Inappropriate ioctl for device)
+      write(1, "x\r", 2)          = 2
+      close(1)                    = 0
+   #+end_src
+
+****** TCGETS 
+      Get the terminal properties in a termios structure
+
+***** With lisp:
+
+       #+BEGIN_SRC lisp
+         (with-open-file (s "/dev/null" :direction :io :if-exists :supersede)
+           (format s "supersede~%"))
+
+         ;; open("/dev/null", O_RDWR|O_CREAT|O_TRUNC, 0666) = 5
+         ;; write(5, "supersede\n", 10)             = 10
+         ;; close(5)
+       #+END_SRC
+
+       #+BEGIN_SRC lisp
+        (with-open-file (s "/dev/null" :direction :io :if-exists :overwrite)
+          (format s "overwrite~%"))
+
+        ;; open("/dev/null", O_RDWR)               = 5
+        ;; write(5, "overwrite\n", 10)             = 10
+        ;; close(5)     
+       #+END_SRC
+       
+       #+BEGIN_SRC lisp
+       (with-open-file (s "/dev/null" :direction :io :if-exists :append)
+         (format s "append~%"))
+       
+       ;; open("/dev/null", O_RDWR|O_APPEND)      = 5
+       ;; lseek(5, 0, SEEK_END)                   = 0
+       ;; write(5, "append\n", 7)                 = 7
+       ;; close(5)                                = 0
+       #+END_SRC
+
+      Entered on: [2016-10-07 fr. 08:48]
+
+
