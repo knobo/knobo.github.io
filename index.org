@@ -109,5 +109,43 @@
        #+END_SRC
 
       Entered on: [2016-10-07 fr. 08:48]
+**** 
 
 
+
+   Entered on: [2016-10-07 fr. 23:58]
+*** 2016-10-08 lørdag
+**** inc/dec next number
+
+     Two function that I often use in vim. Search for next number,
+     then increase or decrease by one
+
+#+BEGIN_SRC elisp
+   (defun inc-next ()
+     (interactive)
+     (search-forward-regexp "-?[0-9]+")
+     (let* ((start (match-beginning 0))
+            (end (match-end 0))
+            (num (1+
+                  (progn
+                    (goto-char start)
+                    (thing-at-point 'number)))))
+       (delete-region start end)
+       (insert (format "%s" num))
+       (goto-char start)))
+
+   (defun dec-next ()
+     (interactive)
+     (search-forward-regexp "[0-9]+")
+     (let* ((start (match-beginning 0))
+            (end (match-end 0))
+            (num (1-
+                  (progn
+                    (goto-char start)
+                    (thing-at-point 'number)))))
+       (delete-region start end)
+       (insert (format "%s" num))
+       (goto-char start)))
+#+END_SRC
+
+   Entered on: [2016-10-08 lø. 20:27]
